@@ -1,21 +1,24 @@
-======================================================================
-David W. Aha
-9/27/88 
-Comments on the Mushroom Database
-======================================================================
 
-I've replaced the original database twice.  
-   1. The database was lost due to backup/downtime problems here at
-      UCI.  I replaced the database with a version given to me by
-      Wayne Iba.  A brief check indicated that it was in good shape.
-   2. Jeff Schlimmer, donater of the database, recently mailed me a
-      copy of the database, with suitable 1-character acronymns for
-      attribute values (the size of the compressed database shrinks
-      from 120 to 50k).  
+Pour la séparation des bases : 
 
-I suspect that several people have had trouble copying the database over
-to their locations.  Please let me know if there is any problem in the 
-future.
+Il faut séparer en 
+- Entraînement (60-80% de la base) sur lequel le modèle s'entraîne
+- Base de validation (10-20% de la base) pour ajuster / modifier les hyperparamètres sans toucher encore à la base test 
+- Test (10-20%) sert du test à la toute fin lorsque les hyperparamètres on été ajustés, c'est selon les résultats du modèle sur cette base qu'on évalue le modèle 
 
-Thanks,
-    Dave Aha
+Comment séparer concrètement ? 
+- from sklearn.model_selection import train_test_split
+
+# Première séparation : 80% entraînement/validation, 20% test
+X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Deuxième séparation : diviser les 80% en 75% entraînement, 25% validation
+# (ce qui donne 60% entraînement, 20% validation, 20% test au final)
+X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42)
+
+Utiliser stratify = colonne_label dans la fonction train_test_split sinon pb 
+
+
+
+
+
