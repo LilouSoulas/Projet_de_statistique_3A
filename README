@@ -20,5 +20,26 @@ Utiliser stratify = colonne_label dans la fonction train_test_split sinon pb
 
 
 
+Les ≠ tests / métriques : 
+Accuracy : sur tous les cas, quel % j'ai bien classé ?
+Accuracy=VP+VN/VP+VN+FP+FN
+
+Précision : parmi les cas que j'ai prédits positifs, combien étaient vraiment positifs ?
+
+Précision=VP/VP+FP
+
+Recall (sensibilité) : parmi les vrais positifs, combien j'en ai détecté ?
+
+Recall=VP/VP+FN\
+
+F1 : moyenne harmonique entre précision et recall (balance les deux)
+F1=2×Précision×Recall/Précision+Recall
+
+
+* Accuracy : général, données équilibrées
+* Précision : quand les faux positifs coûtent cher (spam detection)
+* Recall : quand les faux négatifs coûtent cher (détection cancer)
+* F1 : quand tu veux un équilibre entre les deux
+
 
 
